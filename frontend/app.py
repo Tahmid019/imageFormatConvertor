@@ -7,8 +7,14 @@ from frontend.components.file_upload import file_uploader_component
 from frontend.components.image_comparision import image_comparison_component
 import os
 from io import BytesIO
+from pathlib import Path
 
-with open(os.path.join(os.path.dirname(__file__), "assets", "logoSvg.svg")) as logos:
+# Get the correct path to assets
+def get_asset_path(relative_path):
+    base_path = Path(__file__).parent
+    return base_path / "assets" / relative_path
+
+with open(get_asset_path("logoSvg.svg")) as logos:
     logo_svg = logos.read()
 
 def main():
@@ -18,7 +24,7 @@ def main():
         layout="wide"
     )
     
-    with open(os.path.join(os.path.dirname(__file__), "assets", "styles.css")) as f:
+    with open(get_asset_path("styles.css")) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
     
     st.title("Image to WebP Converter")
@@ -57,5 +63,3 @@ def main():
             except Exception as e:
                 st.error(f"Failed to convert {uploaded_file.name}: {str(e)}")
 
-if __name__ == "__main__":
-    main()
