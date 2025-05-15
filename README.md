@@ -16,3 +16,6 @@ A local web application for converting JPG/JPEG/PNG images to WebP format.
 2. Install dependencies:
    ```bash
    pip install -r requirements.txt
+3. Run Streamlit Locally:
+   ```bash
+   streamlit run frontend/app.py
